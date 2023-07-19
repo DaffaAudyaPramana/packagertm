@@ -26,27 +26,27 @@ func InsertDataAccounts(db *mongo.Database, nama, email, sosial string, perusaha
 }
 
 func GetDataAccounts(perusahaan string, db *mongo.Database, col string) (data Accounts) {
-	user := db.Collection(col)
+	act := db.Collection(col)
 	filter := bson.M{"perusahaan": perusahaan}
-	err := user.FindOne(context.TODO(), filter).Decode(&data)
+	err := act.FindOne(context.TODO(), filter).Decode(&data)
 	if err != nil {
-		fmt.Printf("getbyperusahaan: %v\n", err)
+		fmt.Printf("getdataaccbyact: %v\n", err)
 	}
 	return data
 }
 func GetDataNama(nama string, db *mongo.Database, col string) (data Accounts) {
-	user := db.Collection(col)
+	accou := db.Collection(col)
 	filter := bson.M{"nama": nama}
-	err := user.FindOne(context.TODO(), filter).Decode(&data)
+	err := accou.FindOne(context.TODO(), filter).Decode(&data)
 	if err != nil {
-		fmt.Printf("getbyperusahaan: %v\n", err)
+		fmt.Printf("getdataaccount: %v\n", err)
 	}
 	return data
 }
 func DeleteDataAccounts(perusahaan string, db *mongo.Database, col string) (data Accounts) {
-	user := db.Collection(col)
+	dct := db.Collection(col)
 	filter := bson.M{"perusahaan": perusahaan}
-	err, _ := user.DeleteOne(context.TODO(), filter)
+	err, _ := dct.DeleteOne(context.TODO(), filter)
 	if err != nil {
 		fmt.Printf("DeleteDataAccounts : %v\n", err)
 	}
@@ -55,11 +55,11 @@ func DeleteDataAccounts(perusahaan string, db *mongo.Database, col string) (data
 }
 
 func DeleteDataNama(nama string, db *mongo.Database, col string) (data Accounts) {
-	user := db.Collection(col)
+	dena := db.Collection(col)
 	filter := bson.M{"nama": nama}
-	err, _ := user.DeleteOne(context.TODO(), filter)
+	err, _ := dena.DeleteOne(context.TODO(), filter)
 	if err != nil {
-		fmt.Printf("DeleteDataAccounts : %v\n", err)
+		fmt.Printf("DeleteDataNama : %v\n", err)
 	}
 	fmt.Println("Succes Delete data")
 	return data
